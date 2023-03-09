@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dummy Site</title>
+	<style>
+		/* CSS for the floating tab */
+		.floating-tab {
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #f2f2f2;
+			padding: 10px 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			z-index: 999;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.floating-tab:hover {
+			transform: translate(-50%, -50%) scale(1.1);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+		}
+
+		.floating-tab button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+
+		.floating-tab button:hover {
+			background-color: #3e8e41;
+		}
+
+		/* Additional styling */
+		body {
+			font-family: Arial, sans-serif;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			text-align: center;
+		}
+
+		h1 {
+			margin-top: 50px;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome to the Dummy Site</h1>
+	<button onclick="openNewTab()">Open Floating Tab in New Tab</button>
+
+	<script>
+		var floatingTab;
+
+		function showFloatingTab() {
+			if (!floatingTab) {
+				// Create floating tab element
+				floatingTab = document.createElement('div');
+				floatingTab.className = 'floating-tab';
+				floatingTab.innerHTML = '<p>Employ me :)))</p><button onclick="removeFloatingTab()">Close</button>';
+				document.body.appendChild(floatingTab);
+			}
+		}
+
+		function removeFloatingTab() {
+			if (floatingTab) {
+				// Remove floating tab element
+				document.body.removeChild(floatingTab);
+				floatingTab = null;
+			}
+		}
+
+		function openNewTab() {
+        // Open new tab with the same URL
+        var newTab = window.open('new-tab.html', '_blank');
+
+        // Wait for the new tab to load before showing the floating tab
+        newTab.addEventListener('load', function() {
+            // Show floating tab in new tab
+            newTab.showFloatingTab = showFloatingTab;
+            newTab.showFloatingTab();
+        });
+
+        // Redirect current tab
+        window.location.href = 'https://www.papajohns.com';
+}
+
+	</script>
+</body>
+</html>
